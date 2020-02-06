@@ -64,21 +64,21 @@ export default class AddNote extends React.Component {
   validateName = () => {
     let name = this.state.noteName.value;
     if (name.length <= 0) {
-      return "Name must not be blank stupidhead";
+      return "Name must not be blank";
     }
   }
 
   validateFolder = () => {
     let name = this.state.folderId.value;
     if (name.length <= 0) {
-      return "OMG select a folder";
+      return "Please select a folder";
     }
   }
 
   validateContent = () => {
     let name = this.state.content.value;
     if (name.length <= 0) {
-      return "CANT be blank my guy";
+      return "Content cannot be blank";
     }
   }
 
@@ -108,6 +108,7 @@ export default class AddNote extends React.Component {
               <p className="error">{this.validateFolder()}</p>}  
           </label>
           <select onChange={e => this.setFolderId(e.target.value)} id="folderSelect">
+            <option value=''>Select A Folder</option>
             {this.context.folders.map( folder => <option value={folder.id}>{folder.name}</option>)}
           </select>
           <label htmlFor="content">
