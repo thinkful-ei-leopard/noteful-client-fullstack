@@ -33,7 +33,7 @@ export default class AddNote extends React.Component {
     let note = {
         id: uuidv4(),
         name: this.state.noteName.value,
-        modified: new Date(),
+        modified: new Date().toISOString(),
         folderId: this.state.folderId.value,
         content: this.state.content.value
     }
