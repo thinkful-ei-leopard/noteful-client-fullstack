@@ -6,3 +6,10 @@
 .AddNote button {
   margin-top: 10px;
 }
+
+.error {
+  background-color: tomato;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+}

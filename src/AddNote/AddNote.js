@@ -10,7 +10,7 @@ export default class AddNote extends React.Component {
   state = {
     noteName: { value: "", touched: false },
     content: { value: "", touched: false },
-    folderId: { value: "", touched: false }
+    folderId: { value: "", empty: false }
   };
 
   setNoteName = name => {
@@ -22,13 +22,22 @@ export default class AddNote extends React.Component {
   };
 
   setFolderId = folderId => {
-    this.setState({ folderId: { value: folderId, touched: true } });
+    this.setState({ folderId: { value: folderId } });
   };
 
   static contextType = ApiContext;
 
   handleFormSubmit(event) {
     event.preventDefault();
+    if(this.state.folderId.value.length <= 0) {
+      this.setState({
+        folderId: {
+          value: '',
+          empty: true
+        }
+      })
+      return false
+    }
 
     let note = {
         id: uuidv4(),
@@ -104,7 +113,7 @@ export default class AddNote extends React.Component {
           />
           <label htmlFor="folderSelect">
               Folder
-              {this.state.folderId.touched && 
+              {this.state.folderId.empty && 
               <p className="error">{this.validateFolder()}</p>}  
           </label>
           <select onChange={e => this.setFolderId(e.target.value)} id="folderSelect">
@@ -117,7 +126,7 @@ export default class AddNote extends React.Component {
               <p className="error">{this.validateContent()}</p>}
           </label>
           <textarea onChange={e => this.setContent(e.target.value)} id="content" value={this.state.content.value} placeholder="DUDE your content goes here."></textarea>
-          <button type="submit" disabled={this.validateName() || this.validateFolder() || this.validateContent()}>Submit Note</button>
+          <button type="submit" disabled={this.validateName() || this.validateContent()}>Submit Note</button>
         </NotefulForm>
       </section>
     );
