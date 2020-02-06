@@ -4,7 +4,7 @@ import NotefulForm from "../NotefulForm/NotefulForm";
 import config from '../config'
 import uuidv4 from 'uuid/v4';
 
-// import './AddFolder.css'
+import './AddNote.css'
 
 export default class AddNote extends React.Component {
   state = {
