@@ -10,7 +10,7 @@ export default class AddNote extends React.Component {
   state = {
     noteName: { value: "", touched: false },
     content: { value: "", touched: false },
-    folderId: { value: "", empty: false }
+    folderid: { value: "", empty: false }
   };
 
   setNoteName = name => {
@@ -21,17 +21,17 @@ export default class AddNote extends React.Component {
     this.setState({ content: { value: content, touched: true } });
   };
 
-  setFolderId = folderId => {
-    this.setState({ folderId: { value: folderId } });
+  setFolderId = folderid => {
+    this.setState({ folderid: { value: folderid } });
   };
 
   static contextType = ApiContext;
 
   handleFormSubmit(event) {
     event.preventDefault();
-    if(this.state.folderId.value.length <= 0) {
+    if(this.state.folderid.value.length <= 0) {
       this.setState({
-        folderId: {
+        folderid: {
           value: '',
           empty: true
         }
@@ -43,11 +43,11 @@ export default class AddNote extends React.Component {
         id: uuidv4(),
         name: this.state.noteName.value,
         modified: new Date().toISOString(),
-        folderId: this.state.folderId.value,
-        content: this.state.content.value
+        content: this.state.content.value,
+        folderid: this.state.folderid.value
     }
 
-    fetch(`${config.API_ENDPOINT}/notes`, {
+    fetch(`${config.API_ENDPOINT}/api/notes`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ export default class AddNote extends React.Component {
   }
 
   validateFolder = () => {
-    let name = this.state.folderId.value;
+    let name = this.state.folderid.value;
     if (name.length <= 0) {
       return "Please select a folder";
     }
@@ -113,7 +113,7 @@ export default class AddNote extends React.Component {
           />
           <label htmlFor="folderSelect">
               Folder
-              {this.state.folderId.empty && 
+              {this.state.folderid.empty && 
               <p className="error">{this.validateFolder()}</p>}  
           </label>
           <select onChange={e => this.setFolderId(e.target.value)} id="folderSelect">
