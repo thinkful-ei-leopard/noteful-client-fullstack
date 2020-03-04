@@ -60,7 +60,7 @@ export default class AddNote extends React.Component {
         }
         return resp.json();
     })
-    .then(() => {
+    .then(note => {
         this.context.addNote(note);
 
         this.props.history.goBack();
@@ -125,7 +125,7 @@ export default class AddNote extends React.Component {
               {this.state.content.touched && 
               <p className="error">{this.validateContent()}</p>}
           </label>
-          <textarea onChange={e => this.setContent(e.target.value)} id="content" value={this.state.content.value} placeholder="DUDE your content goes here."></textarea>
+          <textarea onChange={e => this.setContent(e.target.value)} id="content" value={this.state.content.value} placeholder="your content goes here"></textarea>
           <button type="submit" disabled={this.validateName() || this.validateContent()}>Submit Note</button>
         </NotefulForm>
       </section>

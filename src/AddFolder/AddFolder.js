@@ -37,10 +37,10 @@ export default class AddFolder extends React.Component {
         }
         return resp.json();
     })
-    .then(() => {
+    .then(folder => {
         this.context.addFolder(folder);
 
-        this.props.history.goBack();
+        this.props.history.push('/');
     })
     .catch(error => {
         console.log({ error });
